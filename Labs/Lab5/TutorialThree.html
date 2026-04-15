@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tutorial 3 - Custom Icons</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <style>
+        #map { height: 400px; }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<script>
+    // Create map
+    var map = L.map('map').setView([51.505, -0.09], 13);
+
+    // Tile layer
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+
+    // Custom icon class
+    var LeafIcon = L.Icon.extend({
+        options: {
+            iconSize: [38, 38],
+            iconAnchor: [19, 38],
+            popupAnchor: [0, -30]
+        }
+    });
+
+    // Use online icons instead
+    var greenIcon = new LeafIcon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/188/188333.png'
+    });
+
+    var redIcon = new LeafIcon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/188/188337.png'
+    });
+
+    var orangeIcon = new LeafIcon({
+        iconUrl: 'https://cdn-icons-png.flaticon.com/512/188/188339.png'
+    });
+
+    // Add markers
+    L.marker([51.5, -0.09], {icon: greenIcon}).addTo(map)
+        .bindPopup("I am a green icon.");
+
+    L.marker([51.495, -0.083], {icon: redIcon}).addTo(map)
+        .bindPopup("I am a red icon.");
+
+    L.marker([51.49, -0.1], {icon: orangeIcon}).addTo(map)
+        .bindPopup("I am an orange icon.");
+</script>
+
+</body>
+</html>
